@@ -26,8 +26,6 @@ conda activate rag1
 pip install -r requirement.txt
 
 # jalankan streamlit di port 50000  pada address localhost gpu3
-streamlit run app.py --server.port=50000 --server.address=127.0.0.2
-streamlit run genshin.py --server.port=55000 --server.address=127.0.0.2
 streamlit run sl_e.py --server.port=55000 --server.address=127.0.0.2
 
 # buka terminal baru lalu generate reverse proxy
