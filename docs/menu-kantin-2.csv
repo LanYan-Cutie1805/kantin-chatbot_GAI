@@ -1,0 +1,148 @@
+Kantin,Nama Stall,Nama Produk,Harga,Keterangan Tambahan,Gambar,Porsi per orang
+Gedung P,Soto Ayam Jago,Soto ayam biasa,"Rp16,000",,./images/test.jpg,1
+Gedung P,Soto Ayam Jago,Soto ayam Special,"Rp18,000",lauk ayam lebih banyak dari biasa,./images/page.jpg,1
+Gedung P,Soto Ayam Jago,Soto ayam goreng,"Rp22,000",,./images/Resep-Soto-Ayam-Goreng-Madura.jpg,1
+Gedung P,Soto Ayam Jago,Soto telor biasa/asin,"Rp13,000",bisa pilih telur rebus biasa atau telur rebus asin,./images/soto telor biasa.jpg,1
+Gedung P,Soto Ayam Jago,Soto telor muda uritan,"Rp16,000",,./images/soto uritan.jpg,1
+Gedung P,Soto Ayam Jago,Soto tempe + tahu crispy,"Rp13,000",,./images/soto tempetahu.jpeg,1
+Gedung P,Soto Ayam Jago,Soto daging sapi,"Rp18,000",,./images/soto daging.jpeg,1
+Gedung P,Soto Ayam Jago,Soto daging sapi spesial,"Rp20,000",lauk daging sapi lebih banyak dari biasa,./images/soto daging sapi spesial.jpg,1
+Gedung P,Soto Ayam Jago,Nasi uduk ayam goreng/crispy,"Rp22,000",,./images/nasi uduk ayam goreng krispi.jpg,1
+Gedung P,Soto Ayam Jago,Nasi uduk telor dadar,"Rp12,000",,./images/nasi uduk telor dadar.jpeg,1
+Gedung P,Soto Ayam Jago,Nasi uduk tahu tempe,"Rp12,000",,./images/nasi uduk tahu tempe.jpeg,1
+Gedung P,Soto Ayam Jago,Nasi uduk 3T ( tahu tempe telor),"Rp16,000",,./images/pesan.jpg,1
+Gedung P,Soto Ayam Jago,Nasi uduk empal,"Rp22,000",,./images/nasi uduk empal.jpg,1
+Gedung P,Soto Ayam Jago,Nasi uduk babat paru,"Rp22,000",,./images/nasi uduk paru babat.jpeg,1
+Gedung P,Soto Ayam Jago,Nasi goreng jawa/mawut,"Rp16,000",bisa pilih nasi goreng jawa atau nasi goreng mawut,./images/nasigorengmawut.jpg,1
+Gedung P,Soto Ayam Jago,Nasi goreng babat,"Rp22,000",,./images/nasi goreng babat.jpg,1
+Gedung P,Soto Ayam Jago,Nasi mie sayur,"Rp16,000",,./images/nasi mie sayur.jpg,1
+Gedung P,Soto Ayam Jago,Nasi aneka sayur,,harga bervariasi tergantung sayuran yang dipilih,./images/nasi sayur.jpg,1
+Gedung P,NDOKEE! EXPRESS,Cap cay,"Rp30,000",dengan nasi putih,./images/capcay.jpg,1
+Gedung P,NDOKEE! EXPRESS,Ayam telur asin,"Rp25,000",dengan nasi putih,./images/ayamtelurasin.jpg,1
+Gedung P,NDOKEE! EXPRESS,Ayam koloke,"Rp25,000",dengan nasi putih,./images/ayam koloke.jpg,1
+Gedung P,NDOKEE! EXPRESS,Ayam lada hitam,"Rp25,000",dengan nasi putih,./images/ayam_lada_hitam.jpg,1
+Gedung P,NDOKEE! EXPRESS,Ayam saos inggris,"Rp25,000",dengan nasi putih,./images/ayam saus inggris.jpeg,1
+Gedung P,NDOKEE! EXPRESS,Fuyunghai,"Rp25,000",dengan nasi putih,./images/fuyunghai.jpg,1
+Gedung P,NDOKEE! EXPRESS,Cap cay,"Rp30,000",dengan bakmie/kwetiau/bihun (pilih 1),./images/capcay.jpg,1
+Gedung P,NDOKEE! EXPRESS,Mie ayam lada hitam,"Rp25,000",,./images/mie ayam lada hitam.jpg,1
+Gedung P,NDOKEE! EXPRESS,Lomie,"Rp20,000",,./images/lomie.jpg,1
+Gedung P,NDOKEE! EXPRESS,Tamie cap cay,"Rp35,000",,./images/tamie capcay.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi putih,"Rp5,000",,./images/nasi putih.jpg,1
+Gedung P,NDOKEE! EXPRESS,Telor,"Rp5,000",bisa pilih dadar/ceplok/orak arik,./images/telur.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng ayam,"Rp20,000",,./images/nasi goreng ayam.jpeg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng spesial,"Rp25,000",pilih lauk telor/lap jiang/ham/kornet/sosis,./images/nasi goreng spesial.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng mawut,"Rp25,000",,./images/nasi goreng mawut.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng hong kong,"Rp25,000",,./images/nasi goreng hongkong.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng ikan asin,"Rp25,000",,./images/nasi goreng ikan asin.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng telor,"Rp30,000",pilih telor lap jiong/ham/kornet/sosis,./images/nasi goreng telor.jpeg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng UP,"Rp35,000",,./images/Nasi goreng UP.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng telor asin,"Rp35,000",,./images/nasi goreng telor asin.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng ayam koloke,"Rp35,000",,./images/nasi goreng ayam koloke.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng ayam lada hitam,"Rp35,000",,./images/nasi goreng ayam lada hitam.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng saos inggris,"Rp35,000",,./images/nasi goreng saus inggris.jpg,1
+Gedung P,NDOKEE! EXPRESS,Nasi goreng fuyunghai,"Rp35,000",,./images/nasi goreng fuyunghai.jpeg,1
+Gedung P,Depot KITA,Nasi ayam goreng kremes,"Rp25,000",,./images/nasi ayam goreng kremes.jpg,1
+Gedung P,Depot KITA,Nasi ayam goreng kalasan,"Rp25,000",,./images/ayam-goreng-kalasan-foto-resep-utama.jpg,1
+Gedung P,Depot KITA,Nasi empal suwir,"Rp25,000",,./images/nasi empal suwir.jpg,1
+Gedung P,Depot KITA,Nasi ayam hongkong,"Rp20,000",bisa jumbo + 8000 (porsi lebih besar),./images/nasi ayam hongkong.jpg,1
+Gedung P,Depot KITA,Nasi koloke,"Rp20,000",bisa jumbo + 8000 (porsi lebih besar),./images/nasi goreng ayam koloke.jpg,1
+Gedung P,Depot KITA,Nasi ayam geprek,"Rp20,000",bisa jumbo + 8000 (porsi lebih besar),./images/nasi ayam geprek.jpg,1
+Gedung P,Depot KITA,Nasi ayam kungpao,"Rp20,000",bisa jumbo + 8000 (porsi lebih besar),./images/nasi kungpao.jpeg,1
+Gedung P,Depot KITA,Nasi ham,"Rp25,000",,./images/nasi ham.jpeg,1
+Gedung P,Depot KITA,Nasi fuyunghai,"Rp20,000",,./images/nasi fuyunghai.jpg,1
+Gedung P,Depot KITA,Nasi bbq,"Rp20,000",bisa jumbo + 8000 (porsi lebih besar),./images/nasi bbq.jpeg,1
+Gedung P,Depot KITA,Sosis bakar,"Rp6,000",untuk 1 sosis (tanpa nasi),./images/sosis bakar.jpg,1
+Gedung P,Depot KITA,Nasi mayo,"Rp25,000",ayam mayo,./images/nasi mayo.jpeg,1
+Gedung P,Carnival,French fries (kentang),"Rp17,000","dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/french fries.jpeg,1
+Gedung P,Carnival,Mushroom crispy (jamur),"Rp15,000","dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/mushroom crispy.jpeg,1
+Gedung P,Carnival,Tahu crispy,"Rp13,000","dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/tahu crispy.jpg,1
+Gedung P,Carnival,Kulit ayam crispy,"Rp15,000","dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/kulit ayam crispy.jpg,1
+Gedung P,Carnival,Fishball,"Rp17,000","(bola ikan, isi 10) dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/fish ball.jpg,1
+Gedung P,Carnival,Shrimp ball,"Rp17,000","(bola udang, isi 8) dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/shrimp ball.jpeg,1
+Gedung P,Carnival,Curly fries,"Rp18,000","dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/curly fries.jpeg,1
+Gedung P,Carnival,Combo seafood tofu,"Rp20,000","(french fries + seafood tofu) dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/seafood tofu.jpeg,1
+Gedung P,Carnival,Combo nugget,"Rp20,000","(french fries + nugget) dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/combo nugget.jpg,1
+Gedung P,Carnival,Combo sosis,"Rp20,000","(french fries + sosis) dengan pilihan bumbu: barbeque, ayam bakar, balado, jagung manis, cheese, super pedas dan pilihan saus: saus mayonnaise, chili sauce, tomato sauce (bisa lebih dari 1 bumbu/saus",./images/sosis bakar.jpg,1
+Gedung P,Japanese Food,Yakimeshi original,"Rp20,000",,./images/yakimeshi original.jpg,1
+Gedung P,Japanese Food,Yakimeshi babi,"Rp25,000",,./images/yakimeshi babi.jpg,1
+Gedung P,Japanese Food,Yakimeshi hongkong,"Rp25,000",,./images/yakimeshi hongkong.jpeg,1
+Gedung P,Japanese Food,Yakimeshi ikan asin,"Rp25,000",,./images/yakimeshi ikan asin.jpg,1
+Gedung P,Japanese Food,Yakimeshi ham telur,"Rp25,000",,./images/yakimeshi ham telr.jpg,1
+Gedung P,Japanese Food,Yakimeshi smoked beef,"Rp25,000",,./images/yakimeshi smoked beef.jpeg,1
+Gedung P,Japanese Food,Yakisoba,"Rp20,000",,./images/yakisoba.jpg,1
+Gedung P,Japanese Food,Ramen,"Rp20,000",pilih tingkat pedas level 0 sampai 10,./images/ramen.jpg,1
+Gedung P,Japanese Food,Curry ramen,"Rp25,000",,./images/curry ramen.jpeg,1
+Gedung P,Japanese Food,Chickin raisu teriyaki,"Rp25,000",,./images/chicken raisu teriyaki.jpg,1
+Gedung P,Japanese Food,Chickin raisu Yakiniku,"Rp25,000",,./images/chickin raisu yakiniku.jpeg,1
+Gedung P,Japanese Food,Chickin raisu blackpepper,"Rp25,000",,./images/chickin raisu blackpepper.jpg,1
+Gedung P,Japanese Food,Chickin raisu karage,"Rp25,000",,./images/chickin raisu karage.jpg,1
+Gedung P,Japanese Food,Chickin raisu katsu,"Rp25,000",,./images/chickin raisu katsu.jpg,1
+Gedung P,Japanese Food,Chickin raisu singapore butter milk,"Rp25,000",,./images/Chickin raisu singapore butter milk.jpg,1
+Gedung P,Japanese Food,Omurice,"Rp25,000",,./images/Omurice.jpg,1
+Gedung P,Japanese Food,Okonomiyaki,"Rp25,000",,./images/Okonomiyaki.jpg,1
+Gedung P,Japanese Food,Sushi katsu,"Rp20,000",,./images/Sushi katsu.jpg,1
+Gedung P,Japanese Food,Sushi tuna,"Rp20,000",,./images/Sushi tuna.jpeg,1
+Gedung P,Japanese Food,Sushi crabstick,"Rp20,000",,./images/Sushi crabstick.jpeg,1
+Gedung P,Japanese Food,Paket hemat bento mix,"Rp20,000",,./images/Paket hemat bento mix.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + koloke,"Rp30,000",,./images/nasi goreng ayam koloke.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + lada hitam,"Rp30,000",,./images/nasi goreng ayam lada hitam.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + ayam mentega,"Rp30,000",,./images/Paket hemat Yakimeshi + ayam mentega.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi +  karage,"Rp30,000",,./images/yakimeshi karage.jpeg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + ayam saos inggris,"Rp30,000",,./images/nasi goreng saus inggris.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + ayam cabe garam,"Rp30,000",,./images/Paket hemat Yakimeshi + ayam cabe garam.jpg,1
+Gedung P,Japanese Food,Paket hemat Yakimeshi + katsu,"Rp30,000",,./images/yakimeshi katsu.jpeg,1
+Gedung P,Japanese Food,Telor,"Rp5,000",bisa dadar/ceploki/orak arik,./images/telur.jpg,1
+Gedung P,Japanese Food,Nasi putih,"Rp5,000",,./images/nasi putih.jpg,1
+Gedung P,OPA OYS,Kopi americano,"Rp15,000",,./images/americano.jpg,1
+Gedung P,OPA OYS,Kopi aren latte,"Rp15,000",,./images/Kopi aren latte.jpeg,1
+Gedung P,OPA OYS,Kopi caramel latte,"Rp15,000",,./images/Kopi caramel latte.jpeg,1
+Gedung P,OPA OYS,Kopi hazelnut latte,"Rp15,000",,./images/Kopi hazelnut latte.jpeg,1
+Gedung P,OPA OYS,Kopi Tubruk,"Rp15,000",,./images/Kopi-Tubruk.jpg,1
+Gedung P,OPA OYS,Kopi cinnamon latte,"Rp15,000",,./images/Kopi cinnamon latte.jpg,1
+Gedung P,OPA OYS,Kopi V60,"Rp15,000",,./images/Kopi V60.jpg,1
+Gedung P,OPA OYS,Taro oreo,"Rp15,000",,./images/Taro oreo.jpeg,1
+Gedung P,OPA OYS,Thai tea,"Rp15,000",,./images/Thai tea.jpeg,1
+Gedung P,OPA OYS,Teh tarik,"Rp15,000",,./images/Teh tarik.jpg,1
+Gedung P,OPA OYS,Yakult leci,"Rp17,000",,./images/Yakult leci.jpg,1
+Gedung P,OPA OYS,Matcha,"Rp18,000",,./images/matcha.jpg,1
+Gedung P,OPA OYS,Jus jambu,"Rp10,000",,./images/Jus jambu.jpg,1
+Gedung P,OPA OYS,Jus semangka,"Rp10,000",,./images/Jus semangka.jpg,1
+Gedung P,OPA OYS,Jus melon,"Rp10,000",,./images/Jus melon.jpg,1
+Gedung P,OPA OYS,Jus sirsak,"Rp10,000",,./images/Jus sirsak.jpg,1
+Gedung P,OPA OYS,Jus stroberi,"Rp10,000",,./images/jus stroberi.png,1
+Gedung P,OPA OYS,Jus jeruk,"Rp10,000",,./images/Jus jeruk.jpg,1
+Gedung P,OPA OYS,Jus pisang,"Rp10,000",,./images/Jus pisang.jpeg,1
+Gedung P,OPA OYS,Jus buah naga,"Rp10,000",,./images/Jus buah naga.jpg,1
+Gedung P,OPA OYS,Jus mangga,"Rp10,000",,./images/Jus mangga.jpg,1
+Gedung P,OPA OYS,Jus alpukat,"Rp12,000",,./images/Jus alpukat.jpg,1
+Gedung P,OPA OYS,Jus wortel,"Rp10,000",,./images/Jus wortel.jpg,1
+Gedung P,OPA OYS,Jus timun,"Rp10,000",,./images/Jus timun.jpg,1
+Gedung P,OPA OYS,Jus apel,"Rp10,000",,./images/Jus apel (1).jpeg,1
+Gedung P,OPA OYS,Milkshake fosco,"Rp15,000",,./images/Milkshake fosco.jpeg,1
+Gedung P,OPA OYS,Milkshake black forest,"Rp15,000",,./images/Milkshake black forest.jpeg,1
+Gedung P,OPA OYS,Milkshake choco cream,"Rp15,000",,./images/Milkshake choco cream.jpg,1
+Gedung P,OPA OYS,Milkshake rum raisin,"Rp15,000",,./images/Milkshake rum raisin.jpeg,1
+Gedung P,OPA OYS,Milkshake vanilla ria,"Rp15,000",,./images/Milkshake vanilla ria.jpeg,1
+Gedung P,OPA OYS,Milkshake tiramisu,"Rp15,000",,./images/Milkshake tiramisu.jpeg,1
+Gedung P,OPA OYS,Milkshake milk cream,"Rp15,000",,./images/Milkshake milk cream.jpg,1
+Gedung P,OPA OYS,Milkshake cappucino,"Rp15,000",,./images/Milkshake cappucino.jpeg,1
+Gedung P,OPA OYS,Sirup melon,"Rp5,000",,./images/Sirup melon.jpeg,1
+Gedung P,OPA OYS,Sirup anggur,"Rp5,000",,./images/Sirup anggur.jpeg,1
+Gedung P,OPA OYS,Jeruk peras,"Rp7,000",,./images/Jus jeruk.jpg,1
+Gedung P,OPA OYS,Es cao / cao susu,"Rp7,000",,./images/es cao.jpg,1
+Gedung P,OPA OYS,Nutrisari,"Rp7,000",pilih rasa nutrisari,./images/nutrisari.jpeg,1
+Gedung P,Dapur Mapan,Nasi merah,"Rp10,000","dari beras merah (nasi aja, tanpa lauk)",./images/nasi merah.jpg,1
+Gedung P,Dapur Mapan,Nasi pecel ori,"Rp12,000","nasi + bumbu pecel, tanpa lauk",./images/Nasi pecel ori'.jpg,1
+Gedung P,Dapur Mapan,Nasi rawon,"Rp25,000",,./images/Nasi rawon.jpg,1
+Gedung P,Dapur Mapan,Nasi krengsengan,"Rp25,000",,./images/Nasi krengsengan.jpeg,1
+Gedung P,Dapur Mapan,Nasi empal kremes,"Rp25,000",,./images/Nasi empal kremes.jpg,1
+Gedung P,Dapur Mapan,Nasi paru pedas,"Rp25,000",,./images/Nasi paru pedas.jpeg,1
+Gedung P,Dapur Mapan,Nasi cumi,"Rp25,000",,./images/Nasi cumi.jpg,1
+Gedung P,Dapur Mapan,Nasi dori telur asin,"Rp23,000",,./images/Nasi dori telur asin.jpeg,1
+Gedung P,Dapur Mapan,Nasi ayam bakar,"Rp23,000",,./images/Nasi ayam bakar.jpg,1
+Gedung P,Dapur Mapan,Nasi ayam matah,"Rp22,000",,./images/Nasi ayam matah.jpg,1
+Gedung P,Dapur Mapan,Nasi ayam kremes,"Rp22,000",,./images/nasi ayam goreng kremes.jpg,1
+Gedung P,Dapur Mapan,Nasi ayam penyet,"Rp22,000",,./images/Nasi ayam penyet.jpeg,1
+Gedung P,Dapur Mapan,Nasi ayam rendang,"Rp22,000",,./images/Nasi ayam rendang.jpg,1
+Gedung P,Dapur Mapan,Nasi ayam mayo,"Rp22,000",,./images/Nasi ayam mayo.jpeg,1
+Gedung P,Dapur Mapan,Nasi ayam kungpao,"Rp22,000",,./images/Nasi ayam kungpao.jpg,1
