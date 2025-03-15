@@ -12,14 +12,23 @@ from llama_index.retrievers.bm25 import BM25Retriever
 from llama_index.core.chat_engine import CondensePlusContextChatEngine
 from llama_index.core.retrievers import QueryFusionRetriever
 from llama_index.readers.file import PyMuPDFReader
+from qdrant_client.http.models import VectorParams
 import os
 import pandas as pd
 import re
+import json
 from PIL import Image
+import ast
 
 import nest_asyncio
 nest_asyncio.apply()
+# Initialize Qdrant Client
+QDRANT_URL = "https://7ff22f01-3bd7-4e11-bb42-6be1df97b997.europe-west3-0.gcp.cloud.qdrant.io"
+QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.t5yuSBkfeq9p2EnZcTK2zMrTYqjz3ga8L9qbuhmcoIE"
 
+#qdrant_client = qdrant_client.QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
+embed_model = OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="nomic-embed-text:latest")
 # initialize node parser
 splitter = SentenceSplitter(chunk_size=512)
 
@@ -55,8 +64,26 @@ Untuk setiap jawaban, pastikan Anda memberikan detil yang lengkap.
 Percakapan sejauh ini:
 """
 
+# Set up the Gemini API key
+API_KEY = "AIzaSyCLm4SMRfhyxEiWhDrewIw5X5U3U9MSHJQ"
+API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
+# Function to communicate with Gemini API
+def get_gemini_response(user_input):
+    headers = {"Content-Type": "application/json"}
+    data = {
+        "contents": [{"parts": [{"text": system_prompt + "\n" + user_input}]}]  # Add system prompt before user input
+    }
+    response = requests.post(API_URL, headers=headers, data=json.dumps(data))
+    if response.status_code == 200:
+        response_json = response.json()
+        return response_json["candidates"][0]["content"]["parts"][0]["text"]
+    else:
+        return "Error: Unable to get a response."
+
+
+
 Settings.llm = Ollama(model="llama3.1:latest", base_url="http://127.0.0.1:11434", system_prompt=system_prompt)
-Settings.embed_model = OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest")
+Settings.embed_model = embed_model #OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest")
 
 
 @st.cache_resource(show_spinner="Mempersiapkan data kantin – sabar ya.")
@@ -101,41 +128,48 @@ def load_data(vector_store=None):
 # Function to get image path from the CSV file
 df = pd.read_csv("./docs/menu-kantin-2.csv")  # Load CSV globally
 def show_character_image(character_name):
-    row = df[df["Nama Produk"].str.lower() == character_name.lower()]  # Match character
-    if not row.empty:
-        image_path = row.iloc[0]["Gambar"].strip()  # Get image path
-        abs_path = os.path.abspath(image_path)  # Convert to absolute path
-        
-        #st.write(f"🔍 Debug: Looking for image at {abs_path}")  # Debugging
+    """Retrieve and display all images that match a given menu keyword."""
+    matching_rows = df[df["Nama Produk"].str.lower().str.contains(character_name.lower(), na=False)]
 
-        if os.path.exists(abs_path):
-            return abs_path  # ✅ Correct: Returning the absolute path
+    if not matching_rows.empty:
+        image_paths = []
+        for _, row in matching_rows.iterrows():
+            image_path = row["Gambar"].strip()  # Get image path from CSV
+            abs_path = os.path.abspath(image_path)  # Convert to absolute path
+
+            #st.write(f"🔍 Debug: Looking for image at {abs_path}")  # Debugging info
+
+            if os.path.exists(abs_path):
+                image_paths.append(abs_path)  # Store valid paths
+            else:
+                st.error(f"❌ Image not found at: {abs_path}")
+
+        if image_paths:
+            return image_paths  # Return a list of image paths
         else:
-            st.error(f"❌ Image not found at: {abs_path}")
             return None
     else:
         st.error(f"⚠️ No data found for {character_name}")
         return None
 
-# Function to search data in Qdrant (Hybrid Matching)
 
 # Main Program
-st.title("Petranesian Lapar 🍕")
-st.write("Data partial hanya tersedia untuk Gedung P dan W.")
+st.title("Petranesian Lapar 🍕:tropical_drink::coffee: :rice: :poultry_leg:")
+st.write("Chatbot untuk menu makanan di kantin Gedung P dan W.")
 retriever = load_data()
 
 # Initialize chat history if empty
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant",
-         "content": "Halo! Lagi mau makan/minum apaan? 😉"}
+         "content": "Halo! Mau makan atau minum apa? 😉"}
     ]
 
 # Initialize the chat engine
 if "chat_engine" not in st.session_state.keys():
     # Initialize with custom chat history
     init_history = [
-        ChatMessage(role=MessageRole.ASSISTANT, content="Halo! Lagi mau makan/minum apaan? 😉"),
+        ChatMessage(role=MessageRole.ASSISTANT, content="Halo! Mau makan atau minum apa? 😉"),
     ]
     memory = ChatMemoryBuffer.from_defaults(token_limit=16384)
     st.session_state.chat_engine = CondensePlusContextChatEngine(
@@ -165,30 +199,49 @@ dari percakapan sebelumnya. Pertanyaan independen/standalone question cukup 1 ka
         llm=Settings.llm
     )
 
-
 if "messages" not in st.session_state:
     st.session_state.messages = []
 if "last_image_path" not in st.session_state:
     st.session_state.last_image_path = None
 if "last_character" not in st.session_state:
     st.session_state.last_character = None
-
-
+if "displayed_images" not in st.session_state:
+    st.session_state.displayed_images = set()  # Store displayed images
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         if message.get("type") == "image":
-            st.image(message["content"], caption=message.get("character_name", "image"), use_column_width=True)
+            raw_content = message["content"]
+
+            # Convert string representation of a list into an actual list
+            if isinstance(raw_content, str):
+                try:
+                    image_paths = ast.literal_eval(raw_content)
+                except Exception as e:
+                    st.error(f"Error parsing image list: {e}")
+                    continue  # Skip processing this message if there's an error
+            else:
+                image_paths = raw_content
+
+            #st.write("Processed image list:", image_paths)  # Debugging info
+
+            # Display images only if they haven't been shown before
+            new_images = [img.strip() for img in image_paths if img.strip() not in st.session_state.displayed_images]
+
+            for img_path in new_images:
+                if os.path.exists(img_path):
+                    st.image(img_path, caption=os.path.basename(img_path), use_column_width=True)
+                    st.session_state.displayed_images.add(img_path)
+                else:
+                    st.warning(f"Image not found: {img_path}")
+
         else:
             st.markdown(message["content"])
-#st.write("🔍 Debug: Chat History", st.session_state.messages)
-
 
 if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(prompt)
-
 
     st.session_state.messages.append({"role": "user", "content": prompt})
 
@@ -202,38 +255,32 @@ if prompt := st.chat_input("What is up?"):
         for word in trigger_words + image_words:
             cleaned_prompt = cleaned_prompt.replace(word, "")
 
-        
-        cleaned_prompt = re.sub(r"\b(dari|nya|an|the|me|)\b", "", cleaned_prompt).strip()
+        cleaned_prompt = re.sub(r"\b(dari|nya)\b", "", cleaned_prompt).strip()
         character_name = cleaned_prompt.title()
 
-        
         if character_name:
-            image_path = show_character_image(character_name)
-            if image_path:
-                #st.write(f"✅ Debug: Image path retrieved → {image_path}")
+            image_paths = show_character_image(character_name)
+            if image_paths:
                 st.session_state.messages.append({
                     "role": "assistant",
                     "type": "image",
-                    "content": str(image_path),
+                    "content": str(image_paths),
                     "character_name": character_name
                 })
                 with st.chat_message("assistant"):
-                    st.image(image_path, caption=character_name, use_column_width=True)
+                    st.image(image_paths, caption=[character_name] * len(image_paths), use_column_width=True)
             else:
                 st.error("❌ Image path is None. Something went wrong.")
-            #st.write("🔍 Debug: After Appending →", st.session_state.messages[-1])
-
-            
         else:
             st.error("⚠️ Character name not recognized.")
-            
+
     else:
         with st.chat_message("assistant"):
-            with st.spinner("Berpikir..."):
+            placeholder = st.empty()
+            with st.spinner("Loading..."):
+                placeholder.image("paimon-think.jpg", width=200)
                 response_stream = st.session_state.chat_engine.stream_chat(prompt)
                 st.write_stream(response_stream.response_gen)
-
+            placeholder.empty()
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response_stream.response})
-
-           
