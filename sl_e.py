@@ -65,7 +65,7 @@ Percakapan sejauh ini:
 """
 
 # Set up the Gemini API key
-API_KEY = "AIzaSyCLm4SMRfhyxEiWhDrewIw5X5U3U9MSHJQ"
+API_KEY = ""
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 # Function to communicate with Gemini API
 def get_gemini_response(user_input):
