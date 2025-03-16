@@ -23,8 +23,8 @@ import ast
 import nest_asyncio
 nest_asyncio.apply()
 # Initialize Qdrant Client
-QDRANT_URL = ""
-QDRANT_API_KEY = ""
+# QDRANT_URL = ""
+# QDRANT_API_KEY = ""
 
 #qdrant_client = qdrant_client.QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
@@ -83,7 +83,8 @@ def get_gemini_response(user_input):
 
 
 Settings.llm = Ollama(model="llama3.1:latest", base_url="http://127.0.0.1:11434", system_prompt=system_prompt)
-Settings.embed_model = embed_model #OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest")
+Settings.embed_model = embed_model #Gemini
+#OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest") #kalo llama pake ini
 
 
 @st.cache_resource(show_spinner="Mempersiapkan data kantin – sabar ya.")
