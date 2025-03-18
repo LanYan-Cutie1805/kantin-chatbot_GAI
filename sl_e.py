@@ -13,6 +13,7 @@ from llama_index.core.chat_engine import CondensePlusContextChatEngine
 from llama_index.core.retrievers import QueryFusionRetriever
 from llama_index.readers.file import PyMuPDFReader
 from qdrant_client.http.models import VectorParams
+from llama_index.vector_stores.qdrant import QdrantVectorStore
 import os
 import pandas as pd
 import re
@@ -27,7 +28,11 @@ from qdrant_client import QdrantClient
 QDRANT_URL = "https://7ff22f01-3bd7-4e11-bb42-6be1df97b997.europe-west3-0.gcp.cloud.qdrant.io"
 QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.t5yuSBkfeq9p2EnZcTK2zMrTYqjz3ga8L9qbuhmcoIE"
 
+
 qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+COLLECTION_NAME = "CSV_Data"
+collections = qdrant_client.get_collections()
+print(collections)
 
 # initialize node parser
 splitter = SentenceSplitter(chunk_size=512)
@@ -71,41 +76,12 @@ Settings.embed_model = OllamaEmbedding(base_url="http://127.0.0.1:11434", model_
 @st.cache_resource(show_spinner="Mempersiapkan data kantin – sabar ya.")
 def load_data(vector_store=None):
     with st.spinner(text="Mempersiapkan data kantin – sabar ya."):
-        csv_parser = CSVReader(concat_rows=False)
-        file_extractor = {".csv": csv_parser}
-
-        # Read & load document from folder
-        reader = SimpleDirectoryReader(
-            input_dir="./docs",
-            recursive=True,
-            file_extractor=file_extractor,
-
-            # Suppress file metadata, not sure if this works or not.
-            file_metadata=lambda x: {}
-        )
-        documents = reader.load_data()
-
-        for doc in documents:
-            doc.excluded_llm_metadata_keys = ["filename", "extension"]
-
-
-    nodes = splitter.get_nodes_from_documents(documents, show_progress=True)
-
-    index = VectorStoreIndex.from_documents(documents, show_progress=True)
-    index_retriever = index.as_retriever(similarity_top_k=8)
-    bm25_retriever = BM25Retriever.from_defaults(
-        nodes=nodes,
-        similarity_top_k=16,
-    )
-
-
-    return QueryFusionRetriever(
-        [index_retriever, bm25_retriever],
-        num_queries=2,
-        use_async=True,
-        similarity_top_k=24
-    )
-
+        qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+        vector_store = QdrantVectorStore(client=qdrant_client, collection_name=COLLECTION_NAME)
+        index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
+        index_retriever = index.as_retriever(similarity_top_k=8)
+    
+    return index_retriever
 
 # Function to get image path from the CSV file
 df = pd.read_csv("./docs/menu-kantin-2.csv")  # Load CSV globally
