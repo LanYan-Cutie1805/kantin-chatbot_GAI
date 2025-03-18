@@ -16,19 +16,19 @@ from qdrant_client.http.models import VectorParams
 import os
 import pandas as pd
 import re
-import json
 from PIL import Image
 import ast
 
 import nest_asyncio
 nest_asyncio.apply()
+
 # Initialize Qdrant Client
-# QDRANT_URL = ""
-# QDRANT_API_KEY = ""
+from qdrant_client import QdrantClient
+QDRANT_URL = "https://7ff22f01-3bd7-4e11-bb42-6be1df97b997.europe-west3-0.gcp.cloud.qdrant.io"
+QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.t5yuSBkfeq9p2EnZcTK2zMrTYqjz3ga8L9qbuhmcoIE"
 
-#qdrant_client = qdrant_client.QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
-embed_model = OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="nomic-embed-text:latest")
 # initialize node parser
 splitter = SentenceSplitter(chunk_size=512)
 
@@ -64,27 +64,8 @@ Untuk setiap jawaban, pastikan Anda memberikan detil yang lengkap.
 Percakapan sejauh ini:
 """
 
-# Set up the Gemini API key
-API_KEY = ""
-API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
-# Function to communicate with Gemini API
-def get_gemini_response(user_input):
-    headers = {"Content-Type": "application/json"}
-    data = {
-        "contents": [{"parts": [{"text": system_prompt + "\n" + user_input}]}]  # Add system prompt before user input
-    }
-    response = requests.post(API_URL, headers=headers, data=json.dumps(data))
-    if response.status_code == 200:
-        response_json = response.json()
-        return response_json["candidates"][0]["content"]["parts"][0]["text"]
-    else:
-        return "Error: Unable to get a response."
-
-
-
 Settings.llm = Ollama(model="llama3.1:latest", base_url="http://127.0.0.1:11434", system_prompt=system_prompt)
-Settings.embed_model = embed_model #Gemini
-#OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest") #kalo llama pake ini
+Settings.embed_model = OllamaEmbedding(base_url="http://127.0.0.1:11434", model_name="mxbai-embed-large:latest")
 
 
 @st.cache_resource(show_spinner="Mempersiapkan data kantin – sabar ya.")
