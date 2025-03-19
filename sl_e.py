@@ -14,11 +14,13 @@ from llama_index.core.retrievers import QueryFusionRetriever
 from llama_index.readers.file import PyMuPDFReader
 from qdrant_client.http.models import VectorParams
 from llama_index.vector_stores.qdrant import QdrantVectorStore
+from qdrant_client.models import Filter, FieldCondition, MatchValue
 import os
 import pandas as pd
 import re
 from PIL import Image
 import ast
+import glob
 
 import nest_asyncio
 nest_asyncio.apply()
@@ -109,6 +111,30 @@ def show_character_image(character_name):
     else:
         st.error(f"⚠️ No data found for {character_name}")
         return None
+
+def search_food_image(food_name):
+    """
+    Searches for all images related to a given food item in the local folder.
+    """
+    image_folder = "./images"  # Change this to your actual image folder
+    search_pattern = os.path.join(image_folder, f"*{food_name}*.jpg")  # Adjust extension if needed
+    
+    image_paths = glob.glob(search_pattern)  # Find all matching images
+    
+    return image_paths if image_paths else []  # Always return a list
+
+def extract_food_names(response_text):
+    """
+    Extracts food names from the chatbot's response.
+    """
+    food_names = []
+    # Example regex for food detection (adjust based on chatbot output)
+    known_foods = ["soto ayam", "nasi goreng", "rendang", "gado-gado"]
+    for food in known_foods:
+        if food.lower() in response_text.lower():
+            food_names.append(food)  # Append the full name, not separate words
+
+    return food_names
 
 
 # Main Program
@@ -213,7 +239,7 @@ if prompt := st.chat_input("What is up?"):
         for word in trigger_words + image_words:
             cleaned_prompt = cleaned_prompt.replace(word, "")
 
-        cleaned_prompt = re.sub(r"\b(dari|nya)\b", "", cleaned_prompt).strip()
+        cleaned_prompt = re.sub(r"\b(dari|nya|anu)\b", "", cleaned_prompt).strip()
         character_name = cleaned_prompt.title()
 
         if character_name:
@@ -239,6 +265,20 @@ if prompt := st.chat_input("What is up?"):
                 placeholder.image("paimon-think.jpg", width=200)
                 response_stream = st.session_state.chat_engine.stream_chat(prompt)
                 st.write_stream(response_stream.response_gen)
+
+                food_names = extract_food_names(response_stream.response)
+                
+                for food in food_names:
+                    
+                    image_paths = search_food_image(food)
+                    
+                    if image_paths:
+                        for path in image_paths:
+                            st.image(path, caption=food, width=250)
+                    else:
+                        st.write(f"❌ No image found for {food}")
+            
             placeholder.empty()
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response_stream.response})
+
