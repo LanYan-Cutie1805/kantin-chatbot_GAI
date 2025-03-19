@@ -274,7 +274,10 @@ if prompt := st.chat_input("What is up?"):
                     
                     if image_paths:
                         for path in image_paths:
-                            st.image(path, caption=food, width=250)
+                            image_caption = os.path.basename(path).split('.')[0]
+                            col1, col2, col3 = st.columns([1, 2, 1])
+                            with col2:
+                                st.image(path, caption=image_caption, width=250)
                     else:
                         st.write(f"❌ No image found for {food}")
             
