@@ -139,7 +139,7 @@ def extract_food_names(response_text):
 
 # Main Program
 st.title("Petranesian Lapar 🍕:tropical_drink::coffee: :rice: :poultry_leg:")
-st.write("Chatbot untuk menu makanan di kantin Gedung P dan W.")
+st.write("Chatbot untuk menu makanan di kantin Universitas Kristen Petra Gedung P dan W.")
 retriever = load_data()
 
 # Initialize chat history if empty
