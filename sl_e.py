@@ -130,7 +130,7 @@ def extract_food_names(response_text):
     known_foods = df["Nama Produk"].str.lower().unique()  # Get food names from CSV
     
     for food in known_foods:
-        response_text = str(response)
+        response_text = str(response_stream)
         if food in response_text.lower():
             food_names.append(food)
 
@@ -253,17 +253,23 @@ if prompt := st.chat_input("What is up?"):
             with st.spinner("Loading..."):
                 placeholder.image("paimon-think.jpg", width=200)
                 response_stream = st.session_state.chat_engine.stream_chat(prompt)
+                
                 st.write_stream(response_stream.response_gen)
                 response = st.session_state.chat_engine.chat(prompt)
-                placeholder.markdown(response)
+                placeholder.markdown(response_stream)
 
         # ✅ Store assistant response
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "assistant", "content": response_stream})
 
         # ✅ Check for food names in the response
-        food_names = extract_food_names(response)
+        food_names = extract_food_names(response_stream)
         for food_name in food_names:
-            if food_name.lower() in food_data:
+            matched_food = None
+            for stored_food in food_data.keys():
+                if food_name.lower() in stored_food:
+                    matched_food = stored_food
+                    break
+            if matched_food:
                 price, stall_name, image_path = food_data[food_name.lower()]
 
                 # DEBUG
@@ -286,9 +292,6 @@ if prompt := st.chat_input("What is up?"):
                     "stall_name": stall_name
                 })
 
-            placeholder.empty()
-
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": response_stream.response})
+        placeholder.empty()
 
 
