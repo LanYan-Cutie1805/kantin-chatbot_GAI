@@ -87,30 +87,29 @@ def load_data(vector_store=None):
 
 # Function to get image path from the CSV file
 df = pd.read_csv("./docs/menu-kantin-2.csv")  # Load CSV globally
-def show_character_image(character_name):
-    """Retrieve and display all images that match a given menu keyword."""
-    matching_rows = df[df["Nama Produk"].str.lower().str.contains(character_name.lower(), na=False)]
+def show_character_image(food_name):
+    """Retrieve and display all images that match a given food keyword from the CSV."""
+    matching_rows = df[df["Nama Produk"].str.lower().str.contains(food_name.lower(), na=False)]
 
     if not matching_rows.empty:
         image_paths = []
         for _, row in matching_rows.iterrows():
             image_path = row["Gambar"].strip()  # Get image path from CSV
-            abs_path = os.path.abspath(image_path)  # Convert to absolute path
-
-            #st.write(f"🔍 Debug: Looking for image at {abs_path}")  # Debugging info
+            abs_path = os.path.abspath(image_path)  # Ensure correct path
 
             if os.path.exists(abs_path):
                 image_paths.append(abs_path)  # Store valid paths
             else:
-                st.error(f"❌ Image not found at: {abs_path}")
+                st.warning(f"⚠️ Image not found: {abs_path}")
 
         if image_paths:
-            return image_paths  # Return a list of image paths
+            return image_paths
         else:
             return None
     else:
         st.error(f"⚠️ No data found for {character_name}")
         return None
+    
 
 def search_food_image(food_name):
     """
@@ -125,17 +124,17 @@ def search_food_image(food_name):
 
 def extract_food_names(response_text):
     """
-    Extracts food names from the chatbot's response.
+    Extracts food names dynamically from the chatbot's response.
     """
     food_names = []
-    # Example regex for food detection (adjust based on chatbot output)
-    known_foods = ["soto ayam", "nasi goreng", "rendang", "gado-gado"]
+    known_foods = df["Nama Produk"].str.lower().unique()  # Get food names from CSV
+    
     for food in known_foods:
-        if food.lower() in response_text.lower():
-            food_names.append(food)  # Append the full name, not separate words
+        response_text = str(response)
+        if food in response_text.lower():
+            food_names.append(food)
 
     return food_names
-
 
 # Main Program
 st.title("Petranesian Lapar 🍕:tropical_drink::coffee: :rice: :poultry_leg:")
@@ -192,37 +191,24 @@ if "last_character" not in st.session_state:
 if "displayed_images" not in st.session_state:
     st.session_state.displayed_images = set()  # Store displayed images
 
+def load_food_data():
+    df = pd.read_csv("./docs/menu-kantin-2.csv")  # Ensure the CSV contains columns: Nama Produk, Harga, Nama Stall, Gambar
+    food_dict = {row["Nama Produk"].lower(): (row["Harga"], row["Nama Stall"], row["Gambar"]) for _, row in df.iterrows()}
+    return food_dict
+
+food_data = load_food_data()
+
 # Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        if message.get("type") == "image":
-            raw_content = message["content"]
-
-            # Convert string representation of a list into an actual list
-            if isinstance(raw_content, str):
-                try:
-                    image_paths = ast.literal_eval(raw_content)
-                except Exception as e:
-                    st.error(f"Error parsing image list: {e}")
-                    continue  # Skip processing this message if there's an error
-            else:
-                image_paths = raw_content
-
-            #st.write("Processed image list:", image_paths)  # Debugging info
-
-            # Display images only if they haven't been shown before
-            new_images = [img.strip() for img in image_paths if img.strip() not in st.session_state.displayed_images]
-
-            for img_path in new_images:
-                if os.path.exists(img_path):
-                    st.image(img_path, caption=os.path.basename(img_path), use_column_width=True)
-                    st.session_state.displayed_images.add(img_path)
-                else:
-                    st.warning(f"Image not found: {img_path}")
-
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        if msg.get("type") == "image":
+            image_paths = eval(msg["content"])  # Convert stored string back to list
+            captions = [f"{msg['food_name']} | {msg.get('stall_name', 'Unknown Stall')} | Rp {msg.get('price', 'N/A')}" for _ in image_paths]
+            st.image(image_paths, caption=captions, use_column_width=True)
         else:
-            st.markdown(message["content"])
+            st.markdown(msg["content"])
 
+# ✅ Now handle new user input
 if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -232,56 +218,77 @@ if prompt := st.chat_input("What is up?"):
     trigger_words = ["tunjukkan", "tunjukan", "hasilkan", "berikan", "mana"]
     image_words = ["gambar", "foto"]
 
-    if st.session_state.last_image_path:
-        st.image(st.session_state.last_image_path, caption=st.session_state.last_character, use_column_width=True)
+    # ✅ Check if prompt requires an image
     if any(word in prompt.lower() for word in trigger_words) and any(img_word in prompt.lower() for img_word in image_words):
         cleaned_prompt = prompt.lower()
         for word in trigger_words + image_words:
             cleaned_prompt = cleaned_prompt.replace(word, "")
 
         cleaned_prompt = re.sub(r"\b(dari|nya|anu)\b", "", cleaned_prompt).strip()
-        character_name = cleaned_prompt.title()
+        food_name = cleaned_prompt.title()
 
-        if character_name:
-            image_paths = show_character_image(character_name)
-            if image_paths:
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "type": "image",
-                    "content": str(image_paths),
-                    "character_name": character_name
-                })
-                with st.chat_message("assistant"):
-                    st.image(image_paths, caption=[character_name] * len(image_paths), use_column_width=True)
-            else:
-                st.error("❌ Image path is None. Something went wrong.")
+        if food_name.lower() in food_data:
+            price, stall_name, image_path = food_data[food_name.lower()]
+            
+            # ✅ Store image details including price and stall name
+            st.session_state.messages.append({
+                "role": "assistant",
+                "type": "image",
+                "content": str([image_path]),  # Store as a list for compatibility
+                "food_name": food_name,
+                "price": price,
+                "stall_name": stall_name
+            })
+
+            with st.chat_message("assistant"):
+                caption = f"{food_name} | Stall: {stall_name} | Rp {price}"
+                st.image(image_path, caption=caption, use_column_width=True)
         else:
-            st.error("⚠️ Character name not recognized.")
+            st.error("❌ Makanan tidak ditemukan dalam database.")
 
     else:
+        # ✅ Handle text-based responses
         with st.chat_message("assistant"):
             placeholder = st.empty()
             with st.spinner("Loading..."):
                 placeholder.image("paimon-think.jpg", width=200)
                 response_stream = st.session_state.chat_engine.stream_chat(prompt)
                 st.write_stream(response_stream.response_gen)
+                response = st.session_state.chat_engine.chat(prompt)
+                placeholder.markdown(response)
 
-                food_names = extract_food_names(response_stream.response)
+        # ✅ Store assistant response
+        st.session_state.messages.append({"role": "assistant", "content": response})
+
+        # ✅ Check for food names in the response
+        food_names = extract_food_names(response)
+        for food_name in food_names:
+            if food_name.lower() in food_data:
+                price, stall_name, image_path = food_data[food_name.lower()]
+
+                # DEBUG
+                print(f"Debug Info - Food Name: {food_name}")
+                print(f"Debug Info - Image Path: {image_path}")
+                print(f"Debug Info - Stall Name: {stall_name}")
+                print(f"Debug Info - Price: {price}")
                 
-                for food in food_names:
-                    
-                    image_paths = search_food_image(food)
-                    
-                    if image_paths:
-                        for path in image_paths:
-                            image_caption = os.path.basename(path).split('.')[0]
-                            col1, col2, col3 = st.columns([1, 2, 1])
-                            with col2:
-                                st.image(path, caption=image_caption, width=250)
-                    else:
-                        st.write(f"❌ No image found for {food}")
-            
+                with st.chat_message("assistant"):
+                    caption = f"{food_name} | Stall: {stall_name} | Rp {price}"
+                    st.image(image_path, caption=caption, use_column_width=True)
+
+                # ✅ Store image details
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "type": "image",
+                    "content": str([image_path]),
+                    "food_name": food_name,
+                    "price": price,
+                    "stall_name": stall_name
+                })
+
             placeholder.empty()
+
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response_stream.response})
+
 
